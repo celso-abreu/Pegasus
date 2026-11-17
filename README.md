@@ -4,8 +4,8 @@ Gerenciador nativo de projetos Flutter para Android construído em Kotlin, Jetpa
 
 ## Recursos implementados na Fase 1
 
-- **Autenticação GitHub OAuth Device Flow** (`POST /login/device/code` + polling em `POST /login/oauth/access_token`) sem `client_secret` embutido no app, com:
-  - Código de usuário em fonte monoespaçada (`JetBrains Mono`), botão **Copiar código**, **Abrir GitHub** via Custom Tabs e countdown ao vivo.
+- **Autenticação GitHub OAuth Device Flow funcional** (`POST /login/device/code` + polling automático em `POST /login/oauth/access_token`) sem `client_secret` embutido no app. O usuário autoriza no GitHub enquanto o app continua aguardando a resposta, com:
+  - Código de usuário em fonte monoespaçada, botão **Copiar código**, **Abrir GitHub** via Custom Tabs, countdown ao vivo e opção para cancelar/gerar outro código.
   - Tratamento completo de `authorization_pending`, `slow_down` (+5s), `expired_token`, `access_denied` e fallback por **Personal Access Token (PAT)** validado via `GET /user`.
   - Armazenamento criptografado do token com `EncryptedSharedPreferences` (`AES256_GCM`) e logout automático em HTTP `401`.
 - **Navegação de Repositórios**:

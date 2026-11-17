@@ -13,6 +13,7 @@ import com.flutterforge.domain.model.DeviceCodeInfo
 import com.flutterforge.domain.model.DevicePollResult
 import com.flutterforge.domain.model.User
 import com.flutterforge.domain.repository.AuthRepository
+import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.flow.StateFlow
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -59,6 +60,8 @@ class AuthRepositoryImpl @Inject constructor(
                     )
                 )
             }
+        } catch (cancelled: CancellationException) {
+            throw cancelled
         } catch (t: Throwable) {
             Resource.Error(ErrorHandler.mapThrowable(t))
         }
@@ -94,30 +97,8 @@ class AuthRepositoryImpl @Inject constructor(
                 else -> DevicePollResult.Denied(dto.errorDescription ?: dto.error)
             }
             Resource.Success(result)
-        } catch (t: Throwable) {
-            Resource.Error(ErrorHandler.mapThrowable(t))
-        }
-    }
-
-    override suspend fun exchangeWebCode(code: String): Resource<User> {
-        val clientId = BuildConfig.GITHUB_CLIENT_ID
-        if (!hasClientIdConfigured()) {
-            return Resource.Error(AppError.Unknown("GITHUB_CLIENT_ID não configurado."))
-        }
-
-        return try {
-            val tokenDto = gitHubAuthApi.exchangeWebCode(clientId = clientId, code = code)
-            val accessToken = tokenDto.accessToken
-            if (accessToken.isNullOrBlank()) {
-                val errorMsg = tokenDto.errorDescription ?: tokenDto.error ?: "Falha ao obter token OAuth"
-                return Resource.Error(AppError.Unknown(errorMsg))
-            }
-
-            val userDto = gitHubApi.validateTokenUser(authorization = "Bearer $accessToken")
-            val user = userDto.toDomain()
-            tokenStorage.saveToken(accessToken)
-            preferencesStorage.setCachedUserLogin(user.login)
-            Resource.Success(user)
+        } catch (cancelled: CancellationException) {
+            throw cancelled
         } catch (t: Throwable) {
             Resource.Error(ErrorHandler.mapThrowable(t))
         }
@@ -135,6 +116,8 @@ class AuthRepositoryImpl @Inject constructor(
             tokenStorage.saveToken(cleanToken)
             preferencesStorage.setCachedUserLogin(user.login)
             Resource.Success(user)
+        } catch (cancelled: CancellationException) {
+            throw cancelled
         } catch (t: Throwable) {
             Resource.Error(ErrorHandler.mapThrowable(t))
         }

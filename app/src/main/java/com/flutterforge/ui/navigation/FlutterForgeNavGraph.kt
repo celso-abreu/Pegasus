@@ -191,7 +191,6 @@ fun FlutterForgeNavGraph(
 
                     composable<LoginRoute> {
                         LoginScreen(
-                            onConnectWithGitHub = {},
                             onLoginSuccess = {
                                 navController.navigate(HomeRoute) {
                                     popUpTo(navController.graph.findStartDestination().id) {

@@ -26,12 +26,4 @@ interface GitHubAuthApi {
         @Field("grant_type") grantType: String = "urn:ietf:params:oauth:grant-type:device_code"
     ): AccessTokenResponseDto
 
-    @FormUrlEncoded
-    @Headers("Accept: application/json")
-    @POST("login/oauth/access_token")
-    suspend fun exchangeWebCode(
-        @Field("client_id") clientId: String,
-        @Field("code") code: String,
-        @Field("redirect_uri") redirectUri: String = "pegasus://oauth-callback"
-    ): AccessTokenResponseDto
 }

@@ -11,7 +11,6 @@ interface AuthRepository {
     fun hasClientIdConfigured(): Boolean
     suspend fun startDeviceFlow(): Resource<DeviceCodeInfo>
     suspend fun pollForToken(deviceCode: String, currentIntervalSeconds: Int): Resource<DevicePollResult>
-    suspend fun exchangeWebCode(code: String): Resource<User>
     suspend fun loginWithPersonalAccessToken(token: String): Resource<User>
     suspend fun saveToken(token: String)
     suspend fun logout()
