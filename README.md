@@ -6,7 +6,7 @@ Gerenciador nativo de projetos Flutter para Android construído em Kotlin, Jetpa
 
 - **Autenticação GitHub OAuth Device Flow funcional** (`POST /login/device/code` + polling automático em `POST /login/oauth/access_token`) sem `client_secret` embutido no app. O usuário autoriza no GitHub enquanto o app continua aguardando a resposta, com:
   - Código de usuário em fonte monoespaçada, botão **Copiar código**, **Abrir GitHub** via Custom Tabs, countdown ao vivo e opção para cancelar/gerar outro código.
-  - Tratamento completo de `authorization_pending`, `slow_down` (+5s), `expired_token`, `access_denied` e fallback por **Personal Access Token (PAT)** validado via `GET /user`.
+  - Tratamento completo de `authorization_pending`, `slow_down` (+5s), `expired_token` e `access_denied`.
   - Armazenamento criptografado do token com `EncryptedSharedPreferences` (`AES256_GCM`) e logout automático em HTTP `401`.
 - **Navegação de Repositórios**:
   - Lista paginada com **Paging 3** (`GET /user/repos` e `GET /search/repositories`), busca com debounce, pull-to-refresh e filtros `[Todos]`, `[Só Flutter]` e `[Privados]`.
@@ -41,4 +41,4 @@ O projeto utiliza o **Secrets Gradle Plugin** configurado para ler variáveis de
 GITHUB_CLIENT_ID=Ov23liXXXXXXXXXXXXXX
 ```
 
-> **Nota:** Enquanto o `GITHUB_CLIENT_ID` não estiver configurado, você ainda pode testar todas as telas do aplicativo imediatamente usando a opção **"Usar token manual (PAT)"** na tela de login.
+> **Nota:** Configure o `GITHUB_CLIENT_ID` para habilitar a autenticação com GitHub. Sem essa configuração, o botão de conexão permanece desativado.

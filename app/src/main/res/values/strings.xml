@@ -15,14 +15,8 @@
     <string name="login_subtitle">Gerencie repositórios Flutter, navegue pelo código e importe projetos localmente.</string>
     <string name="login_connect_github">Entrar com GitHub</string>
     <string name="login_authorizing">Autorizando…</string>
-    <string name="login_use_manual_token">Usar Personal Access Token</string>
     <string name="login_device_flow_note">Autenticação segura via GitHub Device Flow.</string>
-    <string name="login_client_id_missing">GITHUB_CLIENT_ID não configurado no .env. Use um token manual abaixo.</string>
-    <string name="login_pat_title">Token de Acesso Pessoal</string>
-    <string name="login_pat_description">Cole um token com escopo repo e read:user.</string>
-    <string name="login_pat_label">Token (ghp_...)</string>
-    <string name="login_pat_validate">Validar e entrar</string>
-    <string name="login_pat_empty">Informe um token válido</string>
+    <string name="login_client_id_missing">Configure GITHUB_CLIENT_ID para conectar sua conta GitHub.</string>
     <string name="login_session_expired">Sua sessão expirou. Entre novamente.</string>
 
     <!-- Device Code -->
