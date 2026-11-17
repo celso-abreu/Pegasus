@@ -32,13 +32,28 @@ Gerenciador nativo de projetos Flutter para Android construído em Kotlin, Jetpa
 
 ### Onde configurar o `GITHUB_CLIENT_ID`
 
-O projeto utiliza o **Secrets Gradle Plugin** configurado para ler variáveis de ambiente / painel **Secrets** (`.env`, nunca commitado ao Git) e injetá-las em `BuildConfig.GITHUB_CLIENT_ID`:
+O **Secrets Gradle Plugin** lê o arquivo `.env` da raiz (ignorado pelo Git) e usa `.env.example` como fallback para preencher `BuildConfig.GITHUB_CLIENT_ID`. O Client ID é público, não um segredo; o valor padrão do projeto também é usado nos builds do GitHub Actions.
 
-- **No Google AI Studio**: adicione a chave `GITHUB_CLIENT_ID` no painel **Secrets** do ambiente.
-- **Em build local**: crie um arquivo `.env` na raiz do projeto (já ignorado pelo `.gitignore`) baseado no `.env.example`:
+- **Build local:** se quiser usar outro OAuth App, crie/edite `.env` na raiz:
 
 ```properties
-GITHUB_CLIENT_ID=Ov23liXXXXXXXXXXXXXX
+GITHUB_CLIENT_ID=seu_client_id
 ```
 
-> **Nota:** Configure o `GITHUB_CLIENT_ID` para habilitar a autenticação com GitHub. Sem essa configuração, o botão de conexão permanece desativado.
+- **Google AI Studio:** configure `GITHUB_CLIENT_ID` no painel **Secrets** do ambiente.
+
+Para autenticar, a OAuth App correspondente precisa ter `Enable Device Flow` habilitado. Não é necessário configurar nem incluir um `Client Secret`.
+
+---
+
+## Gerar APK de release no GitHub Actions
+
+O workflow **Build release APK** executa em pull requests direcionados a `main`, em pushes para `main` ou manualmente em **Actions → Build release APK → Run workflow**. Após a execução, baixe o artefato `pegasus-release-apk` na página do workflow.
+
+Se não houver chave de assinatura configurada, o workflow cria uma chave temporária para assinar o APK. Esse APK pode ser instalado, mas **não poderá ser atualizado** por outro APK assinado por uma execução diferente. Para manter uma assinatura estável, configure em **Settings → Secrets and variables → Actions**:
+
+- `ANDROID_KEYSTORE_BASE64`: keystore de release codificada em Base64.
+- `ANDROID_KEYSTORE_PASSWORD`: senha do keystore.
+- `ANDROID_KEY_PASSWORD`: senha da chave.
+
+A chave no keystore deve usar o alias `upload`. Com esses secrets configurados, os APKs de execuções futuras podem atualizar instalações assinadas pela mesma chave.
