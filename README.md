@@ -42,3 +42,17 @@ GITHUB_CLIENT_ID=Ov23liXXXXXXXXXXXXXX
 ```
 
 > **Nota:** Configure o `GITHUB_CLIENT_ID` para habilitar a autenticação com GitHub. Sem essa configuração, o botão de conexão permanece desativado.
+
+---
+
+## Gerar APK de release no GitHub Actions
+
+O workflow **Build release APK** executa em pull requests direcionados a `main`, em pushes para `main` ou manualmente em **Actions → Build release APK → Run workflow**. Após a execução, baixe o artefato `pegasus-release-apk` na página do workflow.
+
+Se não houver chave de assinatura configurada, o workflow cria uma chave temporária para assinar o APK. Esse APK pode ser instalado, mas **não poderá ser atualizado** por outro APK assinado por uma execução diferente. Para manter uma assinatura estável, configure em **Settings → Secrets and variables → Actions**:
+
+- `ANDROID_KEYSTORE_BASE64`: keystore de release codificada em Base64.
+- `ANDROID_KEYSTORE_PASSWORD`: senha do keystore.
+- `ANDROID_KEY_PASSWORD`: senha da chave.
+
+A chave no keystore deve usar o alias `upload`. Com esses secrets configurados, os APKs de execuções futuras podem atualizar instalações assinadas pela mesma chave.
