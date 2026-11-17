@@ -14,6 +14,7 @@
     <string name="login_headline">Conecte o GitHub.\nConstrua com leveza.</string>
     <string name="login_subtitle">Gerencie repositórios Flutter, navegue pelo código e importe projetos localmente.</string>
     <string name="login_connect_github">Entrar com GitHub</string>
+    <string name="login_authorizing">Autorizando…</string>
     <string name="login_use_manual_token">Usar Personal Access Token</string>
     <string name="login_device_flow_note">Autenticação segura via GitHub Device Flow.</string>
     <string name="login_client_id_missing">GITHUB_CLIENT_ID não configurado no .env. Use um token manual abaixo.</string>
