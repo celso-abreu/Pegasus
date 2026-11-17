@@ -9,7 +9,6 @@ import com.flutterforge.core.common.Resource
 import com.flutterforge.domain.model.DeviceCodeInfo
 import com.flutterforge.domain.model.DevicePollResult
 import com.flutterforge.domain.repository.AuthRepository
-import com.flutterforge.domain.usecase.LoginWithPatUseCase
 import com.flutterforge.domain.usecase.PollForTokenUseCase
 import com.flutterforge.domain.usecase.StartDeviceFlowUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -26,10 +25,6 @@ import javax.inject.Inject
 data class LoginUiState(
     val isClientIdConfigured: Boolean = true,
     val sessionExpiredBanner: Boolean = false,
-    val showPatSheet: Boolean = false,
-    val patInput: String = "",
-    val isValidatingPat: Boolean = false,
-    val patError: AppError? = null,
     val loginSuccess: Boolean = false,
     val isStartingDeviceFlow: Boolean = false,
     val deviceCodeInfo: DeviceCodeInfo? = null,
@@ -42,7 +37,6 @@ data class LoginUiState(
 class LoginViewModel @Inject constructor(
     savedStateHandle: SavedStateHandle,
     private val authRepository: AuthRepository,
-    private val loginWithPatUseCase: LoginWithPatUseCase,
     private val startDeviceFlowUseCase: StartDeviceFlowUseCase,
     private val pollForTokenUseCase: PollForTokenUseCase
 ) : ViewModel() {
@@ -181,47 +175,8 @@ class LoginViewModel @Inject constructor(
         }
     }
 
-    fun openPatSheet() {
-        _uiState.update { it.copy(showPatSheet = true, patError = null) }
-    }
-
-    fun closePatSheet() {
-        _uiState.update { it.copy(showPatSheet = false, patError = null) }
-    }
-
-    fun onPatInputChanged(value: String) {
-        _uiState.update { it.copy(patInput = value, patError = null) }
-    }
-
     fun dismissSessionExpiredBanner() {
         _uiState.update { it.copy(sessionExpiredBanner = false) }
     }
 
-    fun submitPat() {
-        val token = _uiState.value.patInput.trim()
-        if (token.isEmpty()) {
-            _uiState.update { it.copy(patError = AppError.Unknown("Informe um token válido")) }
-            return
-        }
-
-        viewModelScope.launch {
-            _uiState.update { it.copy(isValidatingPat = true, patError = null) }
-            when (val result = loginWithPatUseCase(token)) {
-                is Resource.Success -> {
-                    _uiState.update {
-                        it.copy(
-                            isValidatingPat = false,
-                            showPatSheet = false,
-                            patInput = "",
-                            loginSuccess = true
-                        )
-                    }
-                }
-                is Resource.Error -> {
-                    _uiState.update { it.copy(isValidatingPat = false, patError = result.error) }
-                }
-                Resource.Loading -> Unit
-            }
-        }
-    }
 }
