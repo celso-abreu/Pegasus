@@ -1,0 +1,6 @@
+{
+  "name": "Pegasus",
+  "description": "Gerenciador nativo de projetos Flutter no Android com GitHub Device Flow, navegação de repositórios e importação em streaming.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

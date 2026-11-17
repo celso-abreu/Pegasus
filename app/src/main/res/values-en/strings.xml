@@ -1,0 +1,130 @@
+<resources>
+    <string name="app_name">Pegasus</string>
+
+    <!-- Navigation -->
+    <string name="nav_repos">Repositories</string>
+    <string name="nav_projects">Projects</string>
+    <string name="nav_settings">Settings</string>
+
+    <!-- Splash -->
+    <string name="splash_tagline">Manage your Flutter projects directly on mobile</string>
+    <string name="splash_checking_session">Checking session…</string>
+
+    <!-- Login -->
+    <string name="login_headline">Connect GitHub.\nBuild with ease.</string>
+    <string name="login_subtitle">Manage Flutter repositories, browse source trees, and import projects locally.</string>
+    <string name="login_connect_github">Sign in with GitHub</string>
+    <string name="login_use_manual_token">Use Personal Access Token</string>
+    <string name="login_device_flow_note">Secure authentication via GitHub Device Flow.</string>
+    <string name="login_client_id_missing">GITHUB_CLIENT_ID not configured. Use a manual token below.</string>
+    <string name="login_pat_title">Personal Access Token</string>
+    <string name="login_pat_description">Paste a token with repo and read:user scopes.</string>
+    <string name="login_pat_label">Token (ghp_...)</string>
+    <string name="login_pat_validate">Validate and sign in</string>
+    <string name="login_pat_empty">Please enter a valid token</string>
+    <string name="login_session_expired">Your session expired. Please sign in again.</string>
+
+    <!-- Device Code -->
+    <string name="device_code_title">Authorize device</string>
+    <string name="device_code_instruction">Open github.com/login/device and enter the code:</string>
+    <string name="device_code_copy">Copy code</string>
+    <string name="device_code_copied">Code copied</string>
+    <string name="device_code_open_github">Open GitHub</string>
+    <string name="device_code_expires_in">Expires in %1$s</string>
+    <string name="device_code_polling_waiting">Waiting for authorization…</string>
+    <string name="device_code_polling_slow_down">Adjusting interval (%1$ds)…</string>
+    <string name="device_code_expired">Code expired. Generating new…</string>
+    <string name="device_code_denied">Authorization denied.</string>
+    <string name="device_code_restart">Generate new code</string>
+
+    <!-- Home -->
+    <string name="home_search_placeholder">Search repositories…</string>
+    <string name="home_filter_all">All</string>
+    <string name="home_filter_flutter">Flutter</string>
+    <string name="home_filter_private">Private</string>
+    <string name="home_badge_flutter">FLUTTER</string>
+    <string name="home_badge_private">Private</string>
+    <string name="home_updated_prefix">%1$s</string>
+    <string name="home_no_description">No description</string>
+    <string name="home_empty_title">No repositories</string>
+    <string name="home_empty_subtitle">Try adjusting your search or filter.</string>
+    <string name="home_checking_flutter">Checking…</string>
+
+    <!-- Repo Detail -->
+    <string name="repo_detail_title">Repository</string>
+    <string name="repo_detail_branch">Branch</string>
+    <string name="repo_detail_files">Files</string>
+    <string name="repo_detail_root">Root</string>
+    <string name="repo_detail_pubspec_title">pubspec.yaml</string>
+    <string name="repo_detail_sdk">SDK</string>
+    <string name="repo_detail_version">Version</string>
+    <string name="repo_detail_dependencies">Dependencies (%1$d)</string>
+    <string name="repo_detail_dev_dependencies">Dev (%1$d)</string>
+    <string name="repo_detail_not_flutter">No pubspec.yaml on branch.</string>
+    <string name="repo_detail_import">Import project</string>
+    <string name="repo_detail_importing">Importing…</string>
+    <string name="repo_detail_build_apk">Build APK</string>
+    <string name="repo_detail_apk_soon_title">APK Build in Phase 2</string>
+    <string name="repo_detail_apk_soon_body">In Phase 1 you manage source code locally.\n\nIn Phase 2, Pegasus will compile APKs directly on device.</string>
+    <string name="repo_detail_download_progress">Downloading: %1$s / %2$s</string>
+    <string name="repo_detail_download_indeterminate">Downloading (%1$s)…</string>
+    <string name="repo_detail_extracting">Extracting…</string>
+    <string name="repo_detail_import_success">Imported successfully!</string>
+    <string name="repo_detail_empty_dir">Empty folder</string>
+
+    <!-- Projects -->
+    <string name="projects_title">Projects</string>
+    <string name="projects_empty_title">No saved projects</string>
+    <string name="projects_empty_subtitle">Import a repository to view it here.</string>
+    <string name="projects_swipe_hint">Swipe to remove</string>
+    <string name="projects_deleted">Removed</string>
+    <string name="projects_valid_flutter">Valid Flutter</string>
+    <string name="projects_missing_main">Missing lib/main.dart</string>
+    <string name="projects_not_flutter">No pubspec.yaml</string>
+
+    <!-- Settings -->
+    <string name="settings_title">Settings</string>
+    <string name="settings_account">Account</string>
+    <string name="settings_public_repos">%1$d public</string>
+    <string name="settings_private_repos">%1$d private</string>
+    <string name="settings_rate_limit">GitHub API Rate Limit</string>
+    <string name="settings_rate_core">REST: %1$d / %2$d remaining</string>
+    <string name="settings_rate_search">Search: %1$d / %2$d remaining</string>
+    <string name="settings_rate_reset">Resets at %1$s</string>
+    <string name="settings_refresh_rate_limit">Refresh</string>
+    <string name="settings_appearance">Appearance</string>
+    <string name="settings_dark_theme">Dark theme</string>
+    <string name="settings_dynamic_color">Dynamic color</string>
+    <string name="settings_storage">Storage</string>
+    <string name="settings_clear_cache">Clear cache</string>
+    <string name="settings_cache_cleared">Cache cleared (%1$s)</string>
+    <string name="settings_about">About Pegasus</string>
+    <string name="settings_about_desc">Lightweight Flutter project manager.</string>
+    <string name="settings_logout">Sign out</string>
+    <string name="settings_logout_confirm_title">Sign out?</string>
+    <string name="settings_logout_confirm_body">Your token will be removed from this device.</string>
+
+    <!-- Notifications -->
+    <string name="notif_channel_name">Imports</string>
+    <string name="notif_channel_desc">Repository download progress</string>
+    <string name="notif_downloading_title">Downloading %1$s</string>
+    <string name="notif_downloading_text">%1$s</string>
+    <string name="notif_extracting_text">Extracting…</string>
+    <string name="notif_completed_title">Imported: %1$s</string>
+    <string name="notif_completed_text">Ready in Projects tab</string>
+    <string name="notif_failed_title">Failed to import %1$s</string>
+
+    <!-- Common & Errors -->
+    <string name="action_retry">Retry</string>
+    <string name="action_cancel">Cancel</string>
+    <string name="action_close">Close</string>
+    <string name="action_confirm">Confirm</string>
+    <string name="action_back">Back</string>
+    <string name="error_no_internet">No internet connection.</string>
+    <string name="error_unauthorized">Session expired (401).</string>
+    <string name="error_rate_limit">Rate limit exceeded (403).</string>
+    <string name="error_not_found">Not found (404).</string>
+    <string name="error_server">Server error (%1$d).</string>
+    <string name="error_timeout">Connection timed out.</string>
+    <string name="error_unknown">Error: %1$s</string>
+</resources>
